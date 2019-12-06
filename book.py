@@ -2,16 +2,17 @@ import statistics
 import pprint
 import string
 
-pp = pprint.PrettyPrinter(indent=4)
 
+pp = pprint.PrettyPrinter(indent=4)
 
 def does_end_at_period(line_list):
     word = line_list[-1].lower()
     return word not in ["sir.", "ms.", "mrs.", "mr.", "st."]
 
 def is_chapter_heading(line):
-    if "CHAPTER" in line.upper():
-        return False
+    if "CHAPTER" in line.upper() and len(line.split()) <= 2: 
+        return True
+    return line.replace(" ", "").isdigit()
 
 
 class Book:
