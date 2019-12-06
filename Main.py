@@ -1,6 +1,8 @@
 import sys
 import os
 
+import train
+
 def main():
     if len(sys.argv) != 3:
         error_message()
@@ -9,8 +11,7 @@ def main():
 
     if arg1 == "-t":
         if os.path.isdir(arg2):
-            # TRAINING DATA
-            pass
+            train.main(arg2)
         else:
             print("Folder does not exist.")
 

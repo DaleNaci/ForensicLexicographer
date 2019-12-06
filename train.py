@@ -47,8 +47,8 @@ async def write_to_file(filename="author.json"):
         ))
 
 
-async def main():
-    files = get_file_list("books")
+async def main(arg2):
+    files = get_file_list(arg2)
     books = make_books(files)
 
     await asyncio.wait([
