@@ -1,6 +1,9 @@
+import statistics
 import string
 
+
 class Book:
+    """A class with numerical data about a book"""
 
     def __init__(self, filename):
         self.file_name = filename
@@ -16,7 +19,7 @@ class Book:
             bookText = bookText.replace(c, "")
         wordList = bookText.split()
 
-        self.median_word_length = sum(map(len, wordList)) / len(wordList)
+        self.median_word_length = statistics.median(map(len, wordList))
 
 
     def serialize(self):
