@@ -4,7 +4,6 @@ import os
 def main():
     if len(sys.argv) != 3:
         error_message()
-        exit()
 
     arg1, arg2 = sys.argv[1:]
 
@@ -19,13 +18,12 @@ def main():
         if os.path.isfile(arg2):
             # CHECKING DATA
             pass
+        elif not arg2.endswith(".txt"):
+            print("File must end with '.txt'.")
         else:
             print("File does not exist.")
-
     else:
         error_message()
-        exit()
-
 
 
 def error_message():

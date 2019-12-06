@@ -15,11 +15,11 @@ def is_chapter_heading(line):
 class Book:
 
     def __init__(self, filename):
-        self.filename = filename
+        self.file_name = filename
         self.median_sentence_length = 0
         self.median_word_length = 0
         self.dialogue_ratio = 0
-        
+
 
     def parse(self):
         sentence_lengths = []
@@ -27,7 +27,7 @@ class Book:
         word_count = 0
         quote_word_count = 0
 
-        with open(self.filename, 'r') as book:
+        with open(self.file_name, 'r') as book:
             # panic()
             pass
 
@@ -39,7 +39,7 @@ class Book:
 
     def serialize(self):
         return {
-            "filename": self.filename,
+            "filename": self.file_name,
             "median_sentence_length": self.median_sentence_length,
             "median_word_length": self.median_word_length,
             "dialogue_ratio": self.dialogue_ratio,
