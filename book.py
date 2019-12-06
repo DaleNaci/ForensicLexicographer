@@ -23,6 +23,4 @@ class Book:
         return {
             "filename": self.file_name,
             "median_sentence_length": self.median_sentence_length,
-            "median_word_length": self.median_word_length,
-            "dialogue_ratio": self.dialogue_ratio,
         }

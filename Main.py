@@ -31,6 +31,7 @@ def error_message():
     print("unknown option: " + " ".join(sys.argv[1:]))
     print("usage: python3 Main.py\t[-t <folder>]\n\t\t\t[-c <file>]")
     print()
+    exit()
 
 
 if __name__ == "__main__":
