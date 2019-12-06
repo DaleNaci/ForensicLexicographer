@@ -36,9 +36,9 @@ class Book:
         return {
             "filename": self.filename,
             "median_sentence_length": statistics.median(self.sentence_lengths),
-            "median_word_lengt": statistics.median(self.word_lengths),
+            "median_word_length": statistics.median(self.word_lengths),
             "dialogue_ratio": self.dialogue_words_count / word_count,
         }
 
-    def print():
+    def print(self):
         pp.pprint(self.serialize())
