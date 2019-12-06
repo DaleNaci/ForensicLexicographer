@@ -1,16 +1,21 @@
 import os
+import json
 import statistics 
 import asyncio
 
 from Book import Book
 
 
-profile = {
-    "median_sentence_length": [],
-    "median_word_length": [],
-    "median_dialogue_ratio": [],
-}
 
+sentence_lengths = []
+word_lengths = []
+dialogue_ratios = []
+
+author_profile = {
+    "median_sentence_length": 0,
+    "median_word_length": 0,
+    "median_dialogue_ratio": 0,
+}
 
 def get_file_list(root):
     lst = os.listdir(root)
@@ -24,16 +29,42 @@ def make_books(file_list):
     return books
 
 
-def train(book):
+async def train(book):
     stats = book.parse()
-    
+
+    sentence_lengths.append(stats['median_sentence_length'])
+    word_lengths.append(['median_word_length'])
+    dialogue_ratios.append(['dialogue_ratio'])
 
 
-def main():
-    print("hi")
-    print(get_file_list("books"))
+async def find_median(lst, prop):
+    med = statistics.median(lst)
+    author_profile[prop] = med
+    return
 
+
+def write_to_file(filename="author.json"):
+    with open(filename, 'w+') as out:
+
+        await asyncio.gather([
+            find_median(sentence_lengths, "median_sentence_length"),
+            find_median(word_lengths, "median_word_length"),
+            find_median(dialogue_ratios, "median_dialogue_ratio")
+        ])
+        
+        out.write(json.dumps({
+            author_profile
+        }))
+
+
+async def main():
+    files = get_file_list("books")
+    books = make_books(files)
+
+    await asyncio.gather([
+        train(book) for book in books
+    ])
 
 
 if __name__ == "__main__":
-    main()
+    asyncio.run(main())
