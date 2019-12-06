@@ -7,8 +7,8 @@ class Book:
 
     def __init__(self, filename):
         self.file_name = filename
-        self.median_word_length = 0
-        parse()
+        self.mean_word_length = 0.0
+        self.parse()
 
 
     def parse(self):
@@ -19,11 +19,11 @@ class Book:
             bookText = bookText.replace(c, "")
         wordList = bookText.split()
 
-        self.median_word_length = statistics.median(map(len, wordList))
+        self.mean_word_length = statistics.mean(map(len, wordList))
 
 
     def serialize(self):
         return {
             "filename": self.file_name,
-            "median_sentence_length": self.median_sentence_length,
+            "median_sentence_length": self.mean_sentence_length,
         }

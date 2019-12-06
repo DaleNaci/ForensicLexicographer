@@ -9,7 +9,7 @@ from Book import Book
 word_lengths = []
 
 author_profile = {
-    "median_word_length": 0,
+    "mean_word_length": 0,
 }
 
 def get_file_list(root):
@@ -27,7 +27,7 @@ def make_books(file_list):
 async def train(book):
     stats = book.parse()
 
-    word_lengths.append(['median_word_length'])
+    word_lengths.append(['mean_word_length'])
 
 
 async def find_median(lst, prop):
@@ -40,7 +40,7 @@ def write_to_file(filename="author.json"):
     with open(filename, 'w+') as out:
 
         await asyncio.gather([
-            find_median(word_lengths, "median_word_length")
+            find_median(word_lengths, "mean_word_length")
         ])
 
         out.write(json.dumps({
