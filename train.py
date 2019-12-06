@@ -6,9 +6,9 @@ from Book import Book
 
 
 profile = {
-    "median_sentence_length": 0,
-    "median_word_length": 0,
-    "median_dialogue_ratio": 0,
+    "median_sentence_length": [],
+    "median_word_length": [],
+    "median_dialogue_ratio": [],
 }
 
 
