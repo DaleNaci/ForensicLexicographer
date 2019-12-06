@@ -10,10 +10,11 @@ def does_end_at_period(line_list):
     return word not in ["sir.", "ms.", "mrs.", "mr.", "st."]
 
 def is_chapter_heading(line):
-    if "CHAPTER" in line.upper() and len(line.split()) <= 2: 
+    if "CHAPTER" in line.upper() and len(line.split()) <= 2:
         return True
     return line.replace(" ", "").isdigit()
 
+#test comment
 
 class Book:
 
@@ -23,12 +24,12 @@ class Book:
         self.word_lengths = []
         self.dialogue_words_count = 0
 
-    
+
     def parse(self):
         with open(self.filename, 'r') as book:
             # panic()
             pass
-                
+
 
 
     def serialize(self):
