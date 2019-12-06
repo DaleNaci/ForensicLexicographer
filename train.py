@@ -3,14 +3,14 @@ import json
 import statistics
 import asyncio
 
-from Book import Book
+from book import Book
 
-
-word_lengths = []
 
 author_profile = {
     "mean_word_length": 0,
 }
+word_lengths = []
+
 
 def get_file_list(root):
     lst = os.listdir(root)
@@ -25,36 +25,37 @@ def make_books(file_list):
 
 
 async def train(book):
-    stats = book.parse()
+    book.parse()
+    stats = book.serialize()
+    word_lengths.append(stats['mean_word_length'])
 
-    word_lengths.append(['mean_word_length'])
 
-
-async def find_median(lst, prop):
-    med = statistics.median(lst)
+async def find_mean(lst, prop):
+    med = statistics.mean(lst)
     author_profile[prop] = med
     return
 
 
-def write_to_file(filename="author.json"):
-    with open(filename, 'w+') as out:
-
-        await asyncio.gather([
-            find_median(word_lengths, "mean_word_length")
+async def write_to_file(filename="author.json"):
+    await asyncio.wait([
+            find_mean(word_lengths, "mean_word_length")
         ])
 
-        out.write(json.dumps({
+    with open(filename, 'w+') as out:
+        out.write(json.dumps(
             author_profile
-        }))
+        ))
 
 
 async def main():
     files = get_file_list("books")
     books = make_books(files)
 
-    await asyncio.gather([
+    await asyncio.wait([
         train(book) for book in books
     ])
+
+    await write_to_file()
 
 
 if __name__ == "__main__":

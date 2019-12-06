@@ -1,5 +1,4 @@
 import statistics
-import string
 
 
 class Book:
@@ -8,7 +7,6 @@ class Book:
     def __init__(self, filename):
         self.file_name = filename
         self.mean_word_length = 0.0
-
 
     def parse(self):
         with open(self.file_name, 'r') as inF:
@@ -19,7 +17,6 @@ class Book:
         wordList = bookText.split()
 
         self.mean_word_length = statistics.mean(map(len, wordList))
-
 
     def serialize(self):
         return {
