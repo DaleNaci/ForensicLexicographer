@@ -19,6 +19,7 @@ class Book:
         self.median_sentence_length = 0
         self.median_word_length = 0
         self.dialogue_ratio = 0
+        parse()
 
 
     def parse(self):
