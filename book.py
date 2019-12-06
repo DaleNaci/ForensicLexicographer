@@ -25,5 +25,5 @@ class Book:
     def serialize(self):
         return {
             "filename": self.file_name,
-            "mean_sentence_length": self.mean_sentence_length,
+            "mean_word_length": self.mean_word_length,
         }
