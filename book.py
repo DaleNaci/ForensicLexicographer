@@ -8,7 +8,6 @@ class Book:
     def __init__(self, filename):
         self.file_name = filename
         self.mean_word_length = 0.0
-        self.parse()
 
 
     def parse(self):
