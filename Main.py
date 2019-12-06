@@ -2,14 +2,8 @@ import sys
 import os
 
 def main():
-
-    usage = "usage: python3 Main.py\t[-t <folder>]\n\t\t\t[-c <file>]"
-
     if len(sys.argv) != 3:
-        print()
-        print("unknown option: " + " ".join(sys.argv[1:]))
-        print(usage)
-        print()
+        error_message()
         exit()
 
     arg1, arg2 = sys.argv[1:]
@@ -29,9 +23,16 @@ def main():
             print("File does not exist.")
 
     else:
-        print(usage)
+        error_message()
         exit()
 
+
+
+def error_message():
+    print()
+    print("unknown option: " + " ".join(sys.argv[1:]))
+    print("usage: python3 Main.py\t[-t <folder>]\n\t\t\t[-c <file>]")
+    print()
 
 
 if __name__ == "__main__":
