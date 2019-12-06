@@ -1,41 +1,22 @@
-import statistics
 import string
-
-
-def does_end_at_period(line_list):
-    word = line_list[-1].lower()
-    return word not in ["sir.", "ms.", "mrs.", "mr.", "st."]
-
-def is_chapter_heading(line):
-    if "CHAPTER" in line.upper() and len(line.split()) <= 2:
-        return True
-    return line.replace(" ", "").isdigit()
-
 
 class Book:
 
     def __init__(self, filename):
         self.file_name = filename
-        self.median_sentence_length = 0
         self.median_word_length = 0
-        self.dialogue_ratio = 0
         parse()
 
 
     def parse(self):
-        sentence_lengths = []
-        word_lengths = []
-        word_count = 0
-        quote_word_count = 0
+        with open(self.file_name, 'r') as inF:
+            bookText = inF.read()
 
-        with open(self.file_name, 'r') as book:
-            # panic()
-            pass
+        for c in "!#$%&'()*+,-./:;<=>?@[]^_`{|}~”“\"":
+            bookText = bookText.replace(c, "")
+        wordList = bookText.split()
 
-
-        self.median_sentence_length = statistics.median(sentence_lengths)
-        self.median_word_length = statistics.median(word_lengths)
-        self.dialogue_ratio = quote_word_count / word_count
+        self.median_word_length = sum(map(len, wordList)) / len(wordList)
 
 
     def serialize(self):
