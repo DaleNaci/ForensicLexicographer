@@ -1,20 +1,15 @@
 import os
 import json
-import statistics 
+import statistics
 import asyncio
 
 from Book import Book
 
 
-
-sentence_lengths = []
 word_lengths = []
-dialogue_ratios = []
 
 author_profile = {
-    "median_sentence_length": 0,
     "median_word_length": 0,
-    "median_dialogue_ratio": 0,
 }
 
 def get_file_list(root):
@@ -32,9 +27,7 @@ def make_books(file_list):
 async def train(book):
     stats = book.parse()
 
-    sentence_lengths.append(stats['median_sentence_length'])
     word_lengths.append(['median_word_length'])
-    dialogue_ratios.append(['dialogue_ratio'])
 
 
 async def find_median(lst, prop):
@@ -47,11 +40,9 @@ def write_to_file(filename="author.json"):
     with open(filename, 'w+') as out:
 
         await asyncio.gather([
-            find_median(sentence_lengths, "median_sentence_length"),
-            find_median(word_lengths, "median_word_length"),
-            find_median(dialogue_ratios, "median_dialogue_ratio")
+            find_median(word_lengths, "median_word_length")
         ])
-        
+
         out.write(json.dumps({
             author_profile
         }))
