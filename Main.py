@@ -2,28 +2,45 @@ import sys
 import os
 
 import train
+import check
 
 
 def main():
-    if len(sys.argv) != 3:
+
+    if len(sys.argv) < 3:
         error_message()
 
-    arg1, arg2 = sys.argv[1:]
+    mode = sys.argv[1]
 
-    if arg1 == "-t":
-        if os.path.isdir(arg2):
-            train.run(arg2)
+    if mode == '-t':
+        if len(sys.argv) != 3:
+            error_message()
+
+        folder_name = sys.argv[2]
+
+        if os.path.isdir(folder_name):
+            train.run(folder_name)
+            print("author.json created")
         else:
             print("Folder does not exist.")
 
-    elif arg1 == "-c":
-        if os.path.isfile(arg2):
-            # CHECKING DATA
-            pass
-        elif not arg2.endswith(".txt"):
-            print("File must end with '.txt'.")
-        else:
-            print("File does not exist.")
+    elif mode == '-c':
+        if len(sys.argv) != 4:
+            error_message()
+
+        book_filename = sys.argv[2]
+        author_profile_filename = sys.argv[3]
+
+        if not book_filename.endswith(".txt"):
+            print("book must be .txt file")
+            exit()
+
+        if not author_profile_filename.endswith(".json"):
+            print("author profile must be .json file")
+            exit()
+
+        check.run(book_filename, author_profile_filename)
+
     else:
         error_message()
 
@@ -31,7 +48,7 @@ def main():
 def error_message():
     print()
     print("unknown option: " + " ".join(sys.argv[1:]))
-    print("usage: python3 Main.py\t[-t <folder>]\n\t\t\t[-c <file>]")
+    print("usage: python3 Main.py\t[-t <folder>]\n\t\t\t[-c <file> <author_file>]")
     print()
     exit()
 
