@@ -7,7 +7,7 @@ from book import Book
 
 
 author_profile = {
-    "mean_word_length": 0,
+    "mean_word_length": {},
 }
 word_lengths = []
 
@@ -31,8 +31,13 @@ async def train(book):
 
 
 async def find_mean(lst, prop):
-    med = statistics.mean(lst)
-    author_profile[prop] = med
+    mean = statistics.mean(lst)
+    stdev = statistics.stdev(lst)
+    d = {
+        "mean": mean,
+        "stdev": stdev
+    }
+    author_profile[prop] = d
     return
 
 
