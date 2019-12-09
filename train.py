@@ -32,7 +32,6 @@ async def train(book):
     book.parse()
     stats = book.serialize()
     word_lengths.append(stats['mean_word_length'])
-    # question_percentages.append(stats['question_percentage'])
     sentence_lengths.append(stats['mean_sentence_length'])
 
 
