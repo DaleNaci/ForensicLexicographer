@@ -5,21 +5,12 @@ from scipy.stats import norm
 
 from book import Book
 
-
-"""
-
-author.json should have these properties:
-    - mean_word_length
-
-Take a book and compute the properties above.
-
-[]
-
-"""
-
-
-def run(book_filename, author_filename="author.json", ):
-
+# Takes the book and saves its information using the serialize()
+# function. It then uses z-score statistics to create a distribution
+# graph. The equation used for this is z = (x - (mean)) / (stdev), where
+# x is the data point for the book, mean is the average data point from
+# the json file, and stdev is the standard deviation from the json file.
+def run(book_filename, author_filename):
     try:
         with open(author_filename, 'r') as source:
             author_profile = json.loads(source.read())

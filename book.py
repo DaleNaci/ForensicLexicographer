@@ -5,6 +5,7 @@ import re
 class Book:
     """A class with numerical data about a book"""
 
+
     def __init__(self, filename):
         self.file_name = filename
         self.mean_word_length = 0.0
@@ -18,6 +19,8 @@ class Book:
         self.not_percentage = 0.0
         self.word_diversity = 0.0
 
+    # Counts the number of occurrences of "word" in "texts" and returns
+    # it.
     def wordCount(self, word, text):
         count = 0
         indices = [m.start() for m in re.finditer(word, text)]
@@ -31,7 +34,8 @@ class Book:
 
         return count
 
-
+    # Parses through the text multiple times to set all variables
+    # associated with the "Book" class to its proper values.
     def parse(self):
         with open(self.file_name, 'r') as inF:
             bookText = inF.read()
@@ -74,7 +78,7 @@ class Book:
 
         self.word_diversity = len(set(wordList1)) / len(wordList1)
 
-
+    # Returns all variables associated with "Class" in a dictionary.
     def serialize(self):
         return {
             "filename": self.file_name,

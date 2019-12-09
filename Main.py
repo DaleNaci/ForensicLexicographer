@@ -2,6 +2,7 @@ import sys
 import os
 import subprocess
 
+# Pip installs scipy if not already on the machine
 try:
     import scipy
 except:
@@ -11,9 +12,13 @@ except:
 import train
 import check
 
-
+# This runs through different processes, depending on sys.argv[1]. If
+# sys.argv[1] is "-t", it will "train" an algorithm (aka create a json
+# file). If sys.argv[1] is "-c", it will compare a given .txt file
+# against a given .json file, and print out whether the percentage
+# chance of the .txt file being written by the author that the .json
+# file refers to.
 def main():
-
     if len(sys.argv) < 3:
         error_message()
 
@@ -51,7 +56,7 @@ def main():
     else:
         error_message()
 
-
+# Prints the correct way to call Main.py
 def error_message():
     print()
     print("unknown option: " + " ".join(sys.argv[1:]))

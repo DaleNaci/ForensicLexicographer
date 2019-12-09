@@ -29,15 +29,18 @@ his_percentages = []
 great_percentages = []
 to_percentages = []
 not_percentages = []
-# be_percentages = []
 word_diversities = []
 
 
+# Returns a list containing all files in the "root" directory that end
+# with .txt.
 def get_file_list(root):
     lst = os.listdir(root)
     return [os.path.join(root, f) for f in lst if f.endswith(".txt")]
 
 
+# Returns a list containing "Book" objects created from a "file_list",
+# a list of files that all consist have the .txt ending.
 def make_books(file_list):
     books = []
     for f in file_list:
@@ -45,6 +48,8 @@ def make_books(file_list):
     return books
 
 
+# Takes a given book and obtains all of the data. It then sorts the data
+# into its respective lists.
 async def train(book):
     book.parse()
     stats = book.serialize()
@@ -61,6 +66,9 @@ async def train(book):
     word_diversities.append(stats['word_diversity'])
 
 
+# This finds the mean and standard deviation of the given list and adds
+# a dictionary containing both of them to the author_profile dictionary
+# using the "prop" key.
 async def find_mean(lst, prop):
     mean = statistics.mean(lst)
     stdev = statistics.stdev(lst)
@@ -72,6 +80,9 @@ async def find_mean(lst, prop):
     return
 
 
+# Writes to a json file with the name the same as the folder. It then
+# calls the find_mean() function for all pieces of data to fill
+# author_profile, and then creates and writes it to "folder".json.
 async def write_to_file(folder):
     filename = folder + ".json"
     await asyncio.wait([
@@ -93,6 +104,8 @@ async def write_to_file(folder):
         ))
 
 
+# This is the main function that connects each process of training our
+# algorithm.
 async def main(folder):
     files = get_file_list(folder)
     books = make_books(files)
@@ -103,10 +116,6 @@ async def main(folder):
 
     await write_to_file(folder)
 
-
+# This is the function that gets called by Main.py.
 def run(folder):
     asyncio.run(main(folder))
-
-
-if __name__ == "__main__":
-    run("books")
