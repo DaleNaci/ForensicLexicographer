@@ -8,14 +8,13 @@ from book import Book
 
 author_profile = {
     "mean_word_length": {},
-    "mean_period_percentage": {},
-    "mean_exclamation_percentage": {},
-    "mean_question_percentage": {}
+    # "question_percentage": {},
+    "mean_sentence_length": {}
 }
 word_lengths = []
-period_percentages = []
 exclamation_percentages = []
 question_percentages = []
+sentence_lengths = []
 
 
 def get_file_list(root):
@@ -34,9 +33,8 @@ async def train(book):
     book.parse()
     stats = book.serialize()
     word_lengths.append(stats['mean_word_length'])
-    period_percentages.append(stats['period_percentage'])
-    exclamation_percentages.append(stats['exclamation_percentage'])
-    question_percentages.append(stats['question_percentage'])
+    # question_percentages.append(stats['question_percentage'])
+    sentence_lengths.append(stats['mean_sentence_length'])
 
 
 async def find_mean(lst, prop):
@@ -53,9 +51,8 @@ async def find_mean(lst, prop):
 async def write_to_file(filename="author.json"):
     await asyncio.wait([
         find_mean(word_lengths, "mean_word_length"),
-        find_mean(period_percentages, "period_percentage"),
-        find_mean(exclamation_percentages, "exclamation_percentage"),
-        find_mean(question_percentages, "question_percentage")
+        # find_mean(question_percentages, "question_percentage"),
+        find_mean(sentence_lengths, "mean_sentence_length")
     ])
 
     with open(filename, 'w+') as out:
