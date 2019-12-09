@@ -1,5 +1,6 @@
 import statistics
 import string
+import re
 
 class Book:
     """A class with numerical data about a book"""
@@ -8,7 +9,8 @@ class Book:
         self.file_name = filename
         self.mean_word_length = 0.0
         self.mean_sentence_length = 0.0
-        
+        self.the_percentage = 0.0
+
 
 
     def parse(self):
@@ -18,8 +20,8 @@ class Book:
         bookText1 = bookText
         for c in "!#$%&'()*+,-./:;<=>?@[]^_`{|}~”“\"":
             bookText1 = bookText1.replace(c, "")
-        wordList = bookText1.split()
-        self.mean_word_length = statistics.mean(map(len, wordList))
+        wordList1 = bookText1.split()
+        self.mean_word_length = statistics.mean(map(len, wordList1))
 
 
         bookText2 = bookText
@@ -36,8 +38,23 @@ class Book:
         except:
             pass
 
-        wordList = bookText2.split(".")
-        self.mean_sentence_length = statistics.mean(map(len, wordList))
+        sentenceList1 = bookText2.split(".")
+        wordList2 = [s.split() for s in sentenceList1]
+        self.mean_sentence_length = statistics.mean(map(len, wordList2))
+
+
+
+
+        theCount = 0
+        indices = [m.start() for m in re.finditer("the", bookText1.lower())]
+        for i in indices:
+            cond1 = i > 0
+            cond2 = i < len(bookText1) - 1
+            cond3 = not bookText1[i - 1] in string.ascii_letters
+            if cond1 and cond2 and cond3:
+                theCount += 1
+
+        self.the_percentage = theCount / len(wordList1)
 
 
     def serialize(self):
@@ -45,4 +62,5 @@ class Book:
             "filename": self.file_name,
             "mean_word_length": self.mean_word_length,
             "mean_sentence_length": self.mean_sentence_length,
+            "the_percentage": self.the_percentage
         }

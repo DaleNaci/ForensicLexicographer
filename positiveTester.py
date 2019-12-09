@@ -41,8 +41,8 @@ for f in os.listdir("books"):
     percentageList.append(100 - percentage)
 
     if percentage < 50:
-        print("I am", str(round(100 - percentage, 2))+"%", "sure that this is written by your author")
+        print("I am", str(round(100 - percentage, 2))+"%", "sure that", f, "is written by your author")
     else:
-        print("I am", str(round(percentage, 2))+"%", "sure that this is NOT written by your author")
+        print("I am", str(round(percentage, 2))+"%", "sure that", f, "is NOT written by your author")
 
 print("Average positive percentages:", str(statistics.mean(percentageList))+"%")
