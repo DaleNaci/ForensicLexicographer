@@ -27,7 +27,7 @@ def main():
 
         if os.path.isdir(folder_name):
             train.run(folder_name)
-            print("author.json created")
+            print(folder_name + ".json created")
         else:
             print("Folder does not exist.")
 

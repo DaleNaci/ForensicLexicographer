@@ -14,6 +14,8 @@ class Book:
         self.her_percentage = 0.0
         self.his_percentage = 0.0
         self.great_percentage = 0.0
+        self.to_percentage = 0.0
+        self.not_percentage = 0.0
         self.word_diversity = 0.0
 
     def wordCount(self, word, text):
@@ -67,6 +69,8 @@ class Book:
         self.her_percentage = self.wordCount("her", lowered) / len(wordList1)
         self.his_percentage = self.wordCount("his", lowered) / len(wordList1)
         self.great_percentage = self.wordCount("great", lowered) / len(wordList1)
+        self.to_percentage = self.wordCount("to", lowered) / len(wordList1)
+        self.not_percentage = self.wordCount("not", lowered) / len(wordList1)
 
         self.word_diversity = len(set(wordList1)) / len(wordList1)
 
@@ -81,5 +85,7 @@ class Book:
             "her_percentage": self.her_percentage,
             "his_percentage": self.his_percentage,
             "great_percentage": self.great_percentage,
-            "word_diversity": self.word_diversity,
+            "to_percentage": self.to_percentage,
+            "not_percentage": self.not_percentage,
+            "word_diversity": self.word_diversity
         }

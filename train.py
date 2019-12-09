@@ -16,7 +16,9 @@ author_profile = {
     "her_percentage": {},
     "his_percentage": {},
     "great_percentage": {},
-    "word_diversity": {},
+    "to_percentage": {},
+    "not_percentage": {},
+    "word_diversity": {}
 }
 word_lengths = []
 sentence_lengths = []
@@ -25,6 +27,9 @@ and_percentages = []
 her_percentages = []
 his_percentages = []
 great_percentages = []
+to_percentages = []
+not_percentages = []
+# be_percentages = []
 word_diversities = []
 
 
@@ -51,6 +56,8 @@ async def train(book):
     her_percentages.append(stats['her_percentage'])
     his_percentages.append(stats['his_percentage'])
     great_percentages.append(stats['great_percentage'])
+    to_percentages.append(stats['to_percentage'])
+    not_percentages.append(stats['not_percentage'])
     word_diversities.append(stats['word_diversity'])
 
 
@@ -65,7 +72,8 @@ async def find_mean(lst, prop):
     return
 
 
-async def write_to_file(filename="author.json"):
+async def write_to_file(folder):
+    filename = folder + ".json"
     await asyncio.wait([
         find_mean(word_lengths, "mean_word_length"),
         find_mean(sentence_lengths, "mean_sentence_length"),
@@ -74,7 +82,9 @@ async def write_to_file(filename="author.json"):
         find_mean(her_percentages, "her_percentage"),
         find_mean(his_percentages, "his_percentage"),
         find_mean(great_percentages, "great_percentage"),
-        find_mean(word_diversities, "word_diversity"),
+        find_mean(to_percentages, "to_percentage"),
+        find_mean(not_percentages, "not_percentage"),
+        find_mean(word_diversities, "word_diversity")
     ])
 
     with open(filename, 'w+') as out:
@@ -91,7 +101,7 @@ async def main(folder):
         train(book) for book in books
     ])
 
-    await write_to_file()
+    await write_to_file(folder)
 
 
 def run(folder):

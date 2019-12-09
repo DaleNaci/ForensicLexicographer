@@ -1,6 +1,7 @@
 import json
 import statistics
 import os
+import sys
 
 from scipy.stats import norm
 
@@ -8,12 +9,17 @@ from book import Book
 
 percentageList = []
 
-for f in os.listdir("books/"):
-    if not f.endswith(".txt"):
+if len(sys.argv) != 3:
+    print("Please include folder and json file.")
+    exit()
+
+dir = sys.argv[1]
+for f in os.listdir(dir):
+    if not f.endswith(".txt") or f=="prideandprejudice.txt" or f=="senseandsensibility.txt":
         continue
 
     book_filename = f
-    author_filename = "author.json"
+    author_filename = sys.argv[2]
 
     try:
         with open(author_filename, 'r') as source:
@@ -22,7 +28,7 @@ for f in os.listdir("books/"):
         print("Exit()")
         exit()
 
-    b = Book("books/" + book_filename)
+    b = Book(dir + "/" + book_filename)
     b.parse()
     book = b.serialize()
 
