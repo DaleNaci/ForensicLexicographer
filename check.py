@@ -1,6 +1,8 @@
 import json
 import statistics
 
+from scipy.stats import norm
+
 from book import Book
 
 
@@ -8,27 +10,10 @@ from book import Book
 
 author.json should have these properties:
     - mean_word_length
-    
+
 Take a book and compute the properties above.
 
-The book's properties are compared to the properties in author.json
-The distance between each quantity is computed. Then these values are averaged.
-
-The average is reported as the score. Smaller scores mean higher confidence
-
-For ex:
-
-author.json:
-    - mean_word_length: 4
-    
-book:
-    - mean_word_length: 3
-    
-
-4 - 3 = 1
-
-1 / 1 = 1
-score is 1, the book is most probably written by the author
+[]
 
 """
 
@@ -41,20 +26,24 @@ def run(book_filename, author_filename="author.json", ):
     except:
         exit()
 
-
     b = Book(book_filename)
     b.parse()
     book = b.serialize()
 
-
-    difs = []
+    z_scores = []
     for k in book.keys():
         if k == 'filename':
             continue
-        difs.append(abs(book[k] - author_profile[k]))
 
-    mean = statistics.mean(difs)
+        z = (book[k] - author_profile[k]["mean"]) / author_profile[k]["stdev"]
+        z_scores.append(abs(z))
 
+    mean = statistics.mean(z_scores)
 
-    print(f"Score: {mean}")
-    # print what score means here
+    # This basically looks at a normal curve
+    percentage = 100 * (norm.cdf(mean) - norm.cdf(-mean))
+
+    if percentage < 50:
+        print("I am", str(round(100 - percentage, 2))+"%", "sure that this is written by your author")
+    else:
+        print("I am", str(round(percentage, 2))+"%", "sure that this is NOT written by your author")
