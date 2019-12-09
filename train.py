@@ -11,8 +11,6 @@ author_profile = {
     "mean_sentence_length": {}
 }
 word_lengths = []
-exclamation_percentages = []
-question_percentages = []
 sentence_lengths = []
 
 
