@@ -8,7 +8,6 @@ from book import Book
 
 author_profile = {
     "mean_word_length": {},
-    # "question_percentage": {},
     "mean_sentence_length": {}
 }
 word_lengths = []
@@ -51,7 +50,6 @@ async def find_mean(lst, prop):
 async def write_to_file(filename="author.json"):
     await asyncio.wait([
         find_mean(word_lengths, "mean_word_length"),
-        # find_mean(question_percentages, "question_percentage"),
         find_mean(sentence_lengths, "mean_sentence_length")
     ])
 
