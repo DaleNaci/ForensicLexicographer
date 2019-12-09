@@ -19,7 +19,6 @@ for f in os.listdir("books"):
         with open(author_filename, 'r') as source:
             author_profile = json.loads(source.read())
     except:
-        print("Exit()")
         exit()
 
     b = Book("books/" + book_filename)

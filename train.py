@@ -9,11 +9,17 @@ from book import Book
 author_profile = {
     "mean_word_length": {},
     "mean_sentence_length": {},
-    "the_percentage": {}
+    "the_percentage": {},
+    "and_percentage": {},
+    "upon_percentage": {},
+    "word_diversity": {}
 }
 word_lengths = []
 sentence_lengths = []
 the_percentages = []
+and_percentages = []
+upon_percentages = []
+word_diversities = []
 
 
 def get_file_list(root):
@@ -35,6 +41,9 @@ async def train(book):
     word_lengths.append(stats['mean_word_length'])
     sentence_lengths.append(stats['mean_sentence_length'])
     the_percentages.append(stats['the_percentage'])
+    and_percentages.append(stats['and_percentage'])
+    upon_percentages.append(stats['upon_percentage'])
+    word_diversities.append(stats['word_diversity'])
 
 
 async def find_mean(lst, prop):
@@ -52,7 +61,10 @@ async def write_to_file(filename="author.json"):
     await asyncio.wait([
         find_mean(word_lengths, "mean_word_length"),
         find_mean(sentence_lengths, "mean_sentence_length"),
-        find_mean(the_percentages, "the_percentage")
+        find_mean(the_percentages, "the_percentage"),
+        find_mean(and_percentages, "and_percentage"),
+        find_mean(upon_percentages, "upon_percentage"),
+        find_mean(word_diversities, "word_diversity")
     ])
 
     with open(filename, 'w+') as out:
