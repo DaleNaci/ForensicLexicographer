@@ -1,3 +1,6 @@
+# THIS CODE IS NOT MEANT TO BE RUN BY USERS.
+# This code is only meant for developers.
+
 import json
 import statistics
 import os

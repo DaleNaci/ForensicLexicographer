@@ -1,3 +1,6 @@
+# THIS CODE IS NOT MEANT TO BE RUN BY USERS.
+# This code is only meant for developers.
+
 import json
 import statistics
 import os
@@ -54,9 +57,9 @@ for f in os.listdir(dir):
 
     percentageList.append(100 - percentage)
 
-    if percentage < 50:
-        print("I am", str(round(100 - percentage, 2))+"%", "sure that", f, "is written by your author")
+    if percentage > 50:
+        print("I am", str(round(percentage, 2))+"%", "sure that", f, "is written by your author")
     else:
-        print("I am", str(round(percentage, 2))+"%", "sure that", f, "is NOT written by your author")
+        print("I am", str(round(100 - percentage, 2))+"%", "sure that", f, "is NOT written by your author")
 
 print("Average negative percentages:", str(statistics.mean(percentageList))+"%")
