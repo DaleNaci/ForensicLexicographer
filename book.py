@@ -8,6 +8,7 @@ class Book:
         self.file_name = filename
         self.mean_word_length = 0.0
         self.mean_sentence_length = 0.0
+        
 
 
     def parse(self):
@@ -43,5 +44,5 @@ class Book:
         return {
             "filename": self.file_name,
             "mean_word_length": self.mean_word_length,
-            "mean_sentence_length": self.mean_sentence_length
+            "mean_sentence_length": self.mean_sentence_length,
         }

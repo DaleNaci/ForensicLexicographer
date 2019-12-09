@@ -8,7 +8,7 @@ from book import Book
 
 author_profile = {
     "mean_word_length": {},
-    "mean_sentence_length": {}
+    "mean_sentence_length": {},
 }
 word_lengths = []
 sentence_lengths = []
@@ -29,6 +29,7 @@ def make_books(file_list):
 async def train(book):
     book.parse()
     stats = book.serialize()
+
     word_lengths.append(stats['mean_word_length'])
     sentence_lengths.append(stats['mean_sentence_length'])
 
@@ -47,7 +48,7 @@ async def find_mean(lst, prop):
 async def write_to_file(filename="author.json"):
     await asyncio.wait([
         find_mean(word_lengths, "mean_word_length"),
-        find_mean(sentence_lengths, "mean_sentence_length")
+        find_mean(sentence_lengths, "mean_sentence_length"),
     ])
 
     with open(filename, 'w+') as out:

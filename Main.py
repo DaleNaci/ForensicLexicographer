@@ -1,5 +1,12 @@
 import sys
 import os
+import subprocess
+
+try:
+    import scipy
+except:
+    print("Scipy not detected on this computer. Installing...")
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "scipy"])
 
 import train
 import check
