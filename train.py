@@ -18,7 +18,8 @@ author_profile = {
     "great_percentage": {},
     "to_percentage": {},
     "not_percentage": {},
-    "word_diversity": {}
+    "word_diversity": {},
+    "mean_uncommon_word_length": {}
 }
 word_lengths = []
 sentence_lengths = []
@@ -30,6 +31,7 @@ great_percentages = []
 to_percentages = []
 not_percentages = []
 word_diversities = []
+uncommon_word_lengths = []
 
 
 # Returns a list containing all files in the "root" directory that end
@@ -64,6 +66,7 @@ async def train(book):
     to_percentages.append(stats['to_percentage'])
     not_percentages.append(stats['not_percentage'])
     word_diversities.append(stats['word_diversity'])
+    uncommon_word_lengths.append(stats['mean_uncommon_word_length'])
 
 
 # This finds the mean and standard deviation of the given list and adds
@@ -95,7 +98,8 @@ async def write_to_file(folder):
         find_mean(great_percentages, "great_percentage"),
         find_mean(to_percentages, "to_percentage"),
         find_mean(not_percentages, "not_percentage"),
-        find_mean(word_diversities, "word_diversity")
+        find_mean(word_diversities, "word_diversity"),
+        find_mean(uncommon_word_lengths, "mean_uncommon_word_length")
     ])
 
     with open(filename, 'w+') as out:

@@ -18,6 +18,7 @@ class Book:
         self.to_percentage = 0.0
         self.not_percentage = 0.0
         self.word_diversity = 0.0
+        self.mean_uncommon_word_length = 0.0
 
     # Counts the number of occurrences of "word" in "texts" and returns
     # it.
@@ -48,6 +49,15 @@ class Book:
         wordList1 = bookText1.split()
         self.mean_word_length = statistics.mean(map(len, wordList1))
 
+        uncommon_words = []
+        with open("most_common_words.txt", "r") as inF:
+            common_words = inF.readlines()
+        for word in wordList1:
+            if word not in common_words:
+                uncommon_words.append(word)
+        self.mean_uncommon_word_length = statistics.mean(
+                                            map(len, uncommon_words)
+                                         )
 
         bookText2 = bookText
         try:
@@ -68,15 +78,16 @@ class Book:
         self.mean_sentence_length = statistics.mean(map(len, wordList2))
 
         lowered = bookText1.lower()
-        self.the_percentage = self.wordCount("the", lowered) / len(wordList1)
-        self.and_percentage = self.wordCount("and", lowered) / len(wordList1)
-        self.her_percentage = self.wordCount("her", lowered) / len(wordList1)
-        self.his_percentage = self.wordCount("his", lowered) / len(wordList1)
-        self.great_percentage = self.wordCount("great", lowered) / len(wordList1)
-        self.to_percentage = self.wordCount("to", lowered) / len(wordList1)
-        self.not_percentage = self.wordCount("not", lowered) / len(wordList1)
+        length = len(wordList1)
+        self.the_percentage = self.wordCount("the", lowered) / length
+        self.and_percentage = self.wordCount("and", lowered) / length
+        self.her_percentage = self.wordCount("her", lowered) / length
+        self.his_percentage = self.wordCount("his", lowered) / length
+        self.great_percentage = self.wordCount("great", lowered) / length
+        self.to_percentage = self.wordCount("to", lowered) / length
+        self.not_percentage = self.wordCount("not", lowered) / length
 
-        self.word_diversity = len(set(wordList1)) / len(wordList1)
+        self.word_diversity = len(set(wordList1)) / length
 
     # Returns all variables associated with "Class" in a dictionary.
     def serialize(self):
@@ -91,5 +102,6 @@ class Book:
             "great_percentage": self.great_percentage,
             "to_percentage": self.to_percentage,
             "not_percentage": self.not_percentage,
-            "word_diversity": self.word_diversity
+            "word_diversity": self.word_diversity,
+            "mean_uncommon_word_length": self.mean_uncommon_word_length
         }

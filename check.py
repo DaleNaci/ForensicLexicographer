@@ -1,5 +1,6 @@
 import json
 import statistics
+import math
 
 from scipy.stats import norm
 
@@ -36,7 +37,11 @@ def run(book_filename, author_filename):
     # This basically looks at a normal curve
     percentage = 100 * (norm.cdf(mean) - norm.cdf(-mean))
 
-    if percentage < 50:
-        print("I am", str(round(100 - percentage, 2))+"%", "sure that this is written by your author")
+    # Experimental Constant
+    EXP_C = 6/11
+    percentage = ((100 - percentage) ** (EXP_C)) * (100 ** (1 - EXP_C))
+
+    if percentage > 50:
+        print("I am", str(round(percentage, 2))+"%", "sure that this is written by your author")
     else:
-        print("I am", str(round(percentage, 2))+"%", "sure that this is NOT written by your author")
+        print("I am", str(round(100 - percentage, 2))+"%", "sure that this is NOT written by your author")
