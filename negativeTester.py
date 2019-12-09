@@ -8,7 +8,7 @@ from book import Book
 
 percentageList = []
 
-for f in os.listdir("books/not_twain_books"):
+for f in os.listdir("books/"):
     if not f.endswith(".txt"):
         continue
 
@@ -22,7 +22,7 @@ for f in os.listdir("books/not_twain_books"):
         print("Exit()")
         exit()
 
-    b = Book("books/not_twain_books/" + book_filename)
+    b = Book("books/" + book_filename)
     b.parse()
     book = b.serialize()
 
@@ -33,6 +33,8 @@ for f in os.listdir("books/not_twain_books"):
 
         z = (book[k] - author_profile[k]["mean"]) / author_profile[k]["stdev"]
         z_scores.append(abs(z))
+
+    z_scores.remove(max(z_scores))
 
     mean = statistics.mean(z_scores)
 

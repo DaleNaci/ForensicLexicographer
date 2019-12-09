@@ -3,6 +3,8 @@ import json
 import statistics
 import asyncio
 
+from scipy import stats
+
 from book import Book
 
 
@@ -11,14 +13,18 @@ author_profile = {
     "mean_sentence_length": {},
     "the_percentage": {},
     "and_percentage": {},
-    "upon_percentage": {},
-    "word_diversity": {}
+    "her_percentage": {},
+    "his_percentage": {},
+    "great_percentage": {},
+    "word_diversity": {},
 }
 word_lengths = []
 sentence_lengths = []
 the_percentages = []
 and_percentages = []
-upon_percentages = []
+her_percentages = []
+his_percentages = []
+great_percentages = []
 word_diversities = []
 
 
@@ -42,7 +48,9 @@ async def train(book):
     sentence_lengths.append(stats['mean_sentence_length'])
     the_percentages.append(stats['the_percentage'])
     and_percentages.append(stats['and_percentage'])
-    upon_percentages.append(stats['upon_percentage'])
+    her_percentages.append(stats['her_percentage'])
+    his_percentages.append(stats['his_percentage'])
+    great_percentages.append(stats['great_percentage'])
     word_diversities.append(stats['word_diversity'])
 
 
@@ -63,8 +71,10 @@ async def write_to_file(filename="author.json"):
         find_mean(sentence_lengths, "mean_sentence_length"),
         find_mean(the_percentages, "the_percentage"),
         find_mean(and_percentages, "and_percentage"),
-        find_mean(upon_percentages, "upon_percentage"),
-        find_mean(word_diversities, "word_diversity")
+        find_mean(her_percentages, "her_percentage"),
+        find_mean(his_percentages, "his_percentage"),
+        find_mean(great_percentages, "great_percentage"),
+        find_mean(word_diversities, "word_diversity"),
     ])
 
     with open(filename, 'w+') as out:

@@ -11,7 +11,9 @@ class Book:
         self.mean_sentence_length = 0.0
         self.the_percentage = 0.0
         self.and_percentage = 0.0
-        self.upon_percentage = 0.0
+        self.her_percentage = 0.0
+        self.his_percentage = 0.0
+        self.great_percentage = 0.0
         self.word_diversity = 0.0
 
     def wordCount(self, word, text):
@@ -35,8 +37,8 @@ class Book:
         bookText1 = bookText
         for c in "!#$%&()*+,-./:;<=>?@[]^_`{|}~”“\"":
             bookText1 = bookText1.replace(c, " ")
-        bookText1 = bookText1.replace(c, "")
-        
+        bookText1 = bookText1.replace("'", "")
+
         wordList1 = bookText1.split()
         self.mean_word_length = statistics.mean(map(len, wordList1))
 
@@ -62,7 +64,9 @@ class Book:
         lowered = bookText1.lower()
         self.the_percentage = self.wordCount("the", lowered) / len(wordList1)
         self.and_percentage = self.wordCount("and", lowered) / len(wordList1)
-        self.upon_percentage = self.wordCount("upon", lowered) / len(wordList1)
+        self.her_percentage = self.wordCount("her", lowered) / len(wordList1)
+        self.his_percentage = self.wordCount("his", lowered) / len(wordList1)
+        self.great_percentage = self.wordCount("great", lowered) / len(wordList1)
 
         self.word_diversity = len(set(wordList1)) / len(wordList1)
 
@@ -74,6 +78,8 @@ class Book:
             "mean_sentence_length": self.mean_sentence_length,
             "the_percentage": self.the_percentage,
             "and_percentage": self.and_percentage,
-            "upon_percentage": self.upon_percentage,
-            "word_diversity": self.word_diversity
+            "her_percentage": self.her_percentage,
+            "his_percentage": self.his_percentage,
+            "great_percentage": self.great_percentage,
+            "word_diversity": self.word_diversity,
         }

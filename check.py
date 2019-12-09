@@ -37,6 +37,8 @@ def run(book_filename, author_filename="author.json", ):
 
         z = (book[k] - author_profile[k]["mean"]) / author_profile[k]["stdev"]
         z_scores.append(abs(z))
+    if max(z_scores) > 2.5:
+        z_scores.remove(max(z_scores))
 
     mean = statistics.mean(z_scores)
 
