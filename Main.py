@@ -12,9 +12,15 @@ except:
 try:
     import scipy
 except:
+    print("Scipy failed to install. Trying again through different process...")
+    subprocess.check_call([sys.executable], "-m", "pip", "install", "--user", "scipy")
+
+try:
+    import scipy
+except:
     print("Installation of scipy failed. Please install manually.")
     exit()
-    
+
 import train
 import check
 
