@@ -7,13 +7,13 @@ try:
     import scipy
 except:
     print("Scipy not detected on this computer. Installing...")
-    subprocess.check_call([sys.executable, "-m", "pip", "install", "scipy"])
-
-try:
-    import scipy
-except:
-    print("Scipy failed to install. Trying again through different process...")
     subprocess.check_call([sys.executable], "-m", "pip", "install", "--user", "scipy")
+
+# try:
+#     import scipy
+# except:
+#     print("Scipy failed to install. Trying again through different process...")
+#     subprocess.check_call([sys.executable], "-m", "pip", "install", "--user", "scipy")
 
 try:
     import scipy
