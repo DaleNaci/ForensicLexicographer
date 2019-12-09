@@ -1,4 +1,4 @@
 # ForensicLexicographer
 Final Project for CS100 class
 
-Run **python3 Main.py** to get started.
+Run **py/python/python3 Main.py** to get started.
